@@ -1,6 +1,6 @@
 """python package.
 
-Python 代码
+Python code
 """
 
 from functools import partial
@@ -9,21 +9,21 @@ import inspect
 from bigmodule import I
 
 # metadata
-# 模块作者
-author = "BigQuant"
-# 模块分类
-category = "通用"
-# 模块显示名
-friendly_name = "Python函数"
-# 文档地址, optional
-doc_url = "https://bigquant.com/wiki/"
-# 是否自动缓存结果
+# Module author
+author = "AFE"
+# Module category
+category = "General"
+# Module display name
+friendly_name = "Python function"
+# Documentation URL, optional
+doc_url = "wiki/"
+# Whether to automatically cache results
 cacheable = True
 
 
 DEFAULT_RUN = """def bigquant_run(input_1, input_2, input_3):
-    # Python 代码入口函数，input_1/2/3 对应三个输入端，data_1/2/3 对应三个输出端
-    # 示例代码如下。在这里编写您的代码
+    # Python code entry function, input_1/2/3 correspond to three input ports, data_1/2/3 correspond to three output ports
+    # Sample code is as follows. Write your code here
 
     import dai
 
@@ -34,27 +34,27 @@ DEFAULT_RUN = """def bigquant_run(input_1, input_2, input_3):
 """
 
 DEFAULT_POST_RUN = """def bigquant_run(outputs):
-    # 后处理函数，可选。输入是主函数的输出，可以在这里对数据做处理，或者返回更友好的outputs数据格式。此函数输出不会被缓存。
+    # Post-processing function, optional. The input is the output of the main function, and you can process the data here or return a more user-friendly outputs data format. The output of this function will not be cached.
     return outputs
 """
 
 
 def run(
-    run: I.code("主函数，返回dict对象", I.code_python, default=DEFAULT_RUN, specific_type_name="函数", auto_complete_type="python"),
-    do_run: I.bool("运行主函数，如果不运行主函数，将通过 data_1 返回函数 partial(run, input_*=input_*)") = True,
+    run: I.code("Main function, returns a dict object", I.code_python, default=DEFAULT_RUN, specific_type_name="function", auto_complete_type="python"),
+    do_run: I.bool("Run the main function, if not running the main function, it will return the function partial(run, input_*=input_*)") = True,
     post_run_outputs_: I.code(
-        "后处理函数，输入是主函数的输出，此函数输出不会被缓存", I.code_python, default=DEFAULT_POST_RUN, specific_type_name="函数", auto_complete_type="python"
+        "Post-processing function, input is the output of the main function, this function's output will not be cached", I.code_python, default=DEFAULT_POST_RUN, specific_type_name="function", auto_complete_type="python"
     ) = None,
-    input_1: I.port("输入1，传入到函数的参数 input_1", optional=True) = None,
-    input_2: I.port("输入2，传入到函数的参数 input_2", optional=True) = None,
-    input_3: I.port("输入3，传入到函数的参数 input_3", optional=True) = None,
+    input_1: I.port("Input 1, passed as parameter input_1 to the function", optional=True) = None,
+    input_2: I.port("Input 2, passed as parameter input_2 to the function", optional=True) = None,
+    input_3: I.port("Input 3, passed as parameter input_3 to the function", optional=True) = None,
     m_meta_kwargs=None,
 ) -> [
-    I.port("输出1，对应函数输出的 data_1", "data_1", optional=True),
-    I.port("输出2，对应函数输出的 data_2", "data_2", optional=True),
-    I.port("输出3，对应函数输出的 data_3", "data_3", optional=True),
+    I.port("Output 1, corresponding to the function's output data_1", "data_1", optional=True),
+    I.port("Output 2, corresponding to the function's output data_2", "data_2", optional=True),
+    I.port("Output 3, corresponding to the function's output data_3", "data_3", optional=True),
 ]:
-    """执行任意Python代码，支持缓存加速。"""
+    """Execute arbitrary Python code with support for cache acceleration."""
 
     if do_run:
         result = run(input_1, input_2, input_3)

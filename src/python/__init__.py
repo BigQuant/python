@@ -21,7 +21,8 @@ doc_url = "https://bigquant.com/wiki/"
 cacheable = True
 
 
-DEFAULT_RUN = """# Python 代码入口函数，input_1/2/3 对应三个输入端，data_1/2/3 对应三个输出端
+DEFAULT_RUN = """def bigquant_run(input_1, input_2, input_3):
+# Python 代码入口函数，input_1/2/3 对应三个输入端，data_1/2/3 对应三个输出端
 # 示例代码如下。在这里编写您的代码
  
  

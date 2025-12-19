@@ -22,15 +22,17 @@ cacheable = True
 
 
 DEFAULT_RUN = """def bigquant_run(input_1, input_2, input_3):
-    # Python 代码入口函数，input_1/2/3 对应三个输入端，data_1/2/3 对应三个输出端
-    # 示例代码如下。在这里编写您的代码
-
-    import dai
-
-    df = input_1.read()
-    ds = dai.DataSource.write_bdb(df)
-
-    return dict(data_1=ds, data_2={"hello": "world"}, data_3=None)
+# Python 代码入口函数，input_1/2/3 对应三个输入端，data_1/2/3 对应三个输出端
+# 示例代码如下。在这里编写您的代码
+ 
+ 
+ 
+import dai
+ 
+df = input_1.read()
+ds = dai.DataSource.write_bdb(df)
+ 
+return dict(data_1=ds, data_2={"hello": "world"}, data_3=None)
 """
 
 DEFAULT_POST_RUN = """def bigquant_run(outputs):
@@ -40,10 +42,10 @@ DEFAULT_POST_RUN = """def bigquant_run(outputs):
 
 
 def run(
-    run: I.code("主函数，返回dict对象", I.code_python, default=DEFAULT_RUN, specific_type_name="函数", auto_complete_type="python"),
+    run: I.code("主函数，返回dict对象", I.code_python, default=DEFAULT_RUN, specific_type_name="函数", auto_complete_type="python",optional=False),
     do_run: I.bool("运行主函数，如果不运行主函数，将通过 data_1 返回函数 partial(run, input_*=input_*)") = True,
     post_run_outputs_: I.code(
-        "后处理函数，输入是主函数的输出，此函数输出不会被缓存", I.code_python, default=DEFAULT_POST_RUN, specific_type_name="函数", auto_complete_type="python"
+        "后处理函数，输入是主函数的输出，此函数输出不会被缓存", I.code_python, default=DEFAULT_POST_RUN, specific_type_name="函数", auto_complete_type="python",optional=False
     ) = None,
     input_1: I.port("输入1，传入到函数的参数 input_1", optional=True) = None,
     input_2: I.port("输入2，传入到函数的参数 input_2", optional=True) = None,

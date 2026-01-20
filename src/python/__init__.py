@@ -42,10 +42,10 @@ DEFAULT_POST_RUN = """def bigquant_run(outputs):
 
 
 def run(
-    run: I.code("主函数，返回dict对象", I.code_python, default=DEFAULT_RUN, specific_type_name="函数", auto_complete_type="python"),
+    run: I.code("主函数，返回dict对象", I.code_python, default=DEFAULT_RUN, specific_type_name="函数", auto_complete_type="python",optional_checked = True,optional = False),
     do_run: I.bool("运行主函数，如果不运行主函数，将通过 data_1 返回函数 partial(run, input_*=input_*)") = True,
     post_run_outputs_: I.code(
-        "后处理函数，输入是主函数的输出，此函数输出不会被缓存", I.code_python, default=DEFAULT_POST_RUN, specific_type_name="函数", auto_complete_type="python"
+        "后处理函数，输入是主函数的输出，此函数输出不会被缓存", I.code_python, default=DEFAULT_POST_RUN, specific_type_name="函数", auto_complete_type="python",optional_checked = True,optional = False
     ) = None,
     input_1: I.port("输入1，传入到函数的参数 input_1", optional=True) = None,
     input_2: I.port("输入2，传入到函数的参数 input_2", optional=True) = None,
